@@ -1,0 +1,18 @@
+server:
+  port: 31000
+spring:
+  application:
+    name: nm‐service‐manage‐cms‐client
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+ningmeng:
+  mq:
+    #队列名 但是不能重复 不同的客户端要有不同的队列
+    queue:
+      routingKet:queues_cms_postpage_01
+    #路由器 使用站点Id 作为RoutingKey
+    routingKey: 5a751fab6abb5044e0d19ea1

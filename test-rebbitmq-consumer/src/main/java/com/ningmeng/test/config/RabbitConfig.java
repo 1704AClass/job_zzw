@@ -26,7 +26,7 @@ public class RabbitConfig {
      * 交换机配置 -- 声明一个交换机
      * durable 持续
      * @Bean(EXCHANGE_TOPICS_INFORM) 等价于 <bean id=""></bean>
-     */
+     */ 
     @Bean(EXCHANGE_TOPICS_INFORM)
     public Exchange EXCHANGE_TOPICS_INFORM(){
         return ExchangeBuilder.topicExchange(EXCHANGE_TOPICS_INFORM).durable(true).build();

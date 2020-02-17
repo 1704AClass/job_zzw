@@ -1,5 +1,6 @@
 package com.ningmeng.manage_cms.service;
 
+import com.alibaba.fastjson.JSON;
 import com.ningmeng.framework.domain.cms.CmsPage;
 import com.ningmeng.framework.domain.cms.request.QueryPageRequest;
 import com.ningmeng.framework.domain.cms.response.CmsCode;
@@ -9,12 +10,16 @@ import com.ningmeng.framework.model.response.CommonCode;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.QueryResult;
 import com.ningmeng.framework.model.response.ResponseResult;
+import com.ningmeng.manage_cms.config.RabbitmqConfig;
 import com.ningmeng.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -24,6 +29,42 @@ import java.util.Optional;
 public class PageService {
     @Autowired
     CmsPageRepository cmsPageRepository;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    //发布页面方法
+    public ResponseResult postPage(String pageId){
+        boolean flag = creatHtml();
+        if(!flag){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+
+        //查询数据库
+        CmsPage cmsPage = this.getById(pageId);
+        if(cmsPage == null){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+
+        Map<String,String> msgMap = new HashMap<>();
+        msgMap.put("pageId",pageId);
+
+        //消息内容
+        String msg = JSON.toJSONString(msgMap);
+        //获取站点id作为routingKey
+        String siteId = cmsPage.getSiteId();
+
+        //发送json{pageId:"1"} sitId就是RoutingKey
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EX_ROUTING_CMS_POSTPAGE,siteId,msg);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    //创建静态页面
+    private boolean creatHtml(){
+        System.out.println("执行页面静态化程序，保存静态化文件完成。。。。。。");
+        //成功
+        return true;
+    }
 
     //删除
     public ResponseResult delete(String id){
@@ -47,7 +88,7 @@ public class PageService {
     }
 
     //更新页面信息
-    public CmsPageResult update(String id,CmsPage cmsPage) {
+    public CmsPageResult update(String id, CmsPage cmsPage) {
     //根据id查询页面信息
         CmsPage page = this.getById(id);
         if (page != null) {

@@ -11,6 +11,7 @@
         <module>../nm-service-manage-cms</module>
         <module>../test-rabbitmq-producer</module>
         <module>../test-rebbitmq-consumer</module>
+        <module>../nm‐service‐manage‐cms‐client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
