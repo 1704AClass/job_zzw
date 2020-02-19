@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 异常捕捉控制器  类似于Controller
+ * 捕捉项目中所遇到的异常情况
+ */
 @ControllerAdvice
 public class ExceptionCatch {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionCatch.class);
