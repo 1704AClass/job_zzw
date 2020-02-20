@@ -13,6 +13,11 @@
     <artifactId>nm-service-manage-course</artifactId>
     <dependencies>
         <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        <dependency>
             <groupId>com.ningmeng</groupId>
             <artifactId>nm-service-api</artifactId>
             <version>1.0-SNAPSHOT</version>

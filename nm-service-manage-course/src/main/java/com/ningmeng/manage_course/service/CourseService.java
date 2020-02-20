@@ -1,14 +1,19 @@
 package com.ningmeng.manage_course.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ningmeng.framework.domain.course.CourseBase;
+import com.ningmeng.framework.domain.course.CourseMarket;
 import com.ningmeng.framework.domain.course.Teachplan;
 import com.ningmeng.framework.domain.course.TeachplanNode;
+import com.ningmeng.framework.domain.course.ext.CourseInfo;
+import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.exception.ExceptionCast;
 import com.ningmeng.framework.model.response.CommonCode;
+import com.ningmeng.framework.model.response.QueryResponseResult;
+import com.ningmeng.framework.model.response.QueryResult;
 import com.ningmeng.framework.model.response.ResponseResult;
-import com.ningmeng.manage_course.dao.CourseBaseRepository;
-import com.ningmeng.manage_course.dao.TeachplanMapper;
-import com.ningmeng.manage_course.dao.TeachplanRepository;
+import com.ningmeng.manage_course.dao.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +32,14 @@ public class CourseService {
 
     @Autowired
     private CourseBaseRepository courseBaseRepository;
+
+    @Autowired
+    private CourseMapper courseMapper;
+
+    @Autowired
+    private CourseMarketwMapper courseMarketwMapper;
+    /*@Autowired
+    private CategoryMapper categoryMapper;*/
 
     //查询课程计划
     public TeachplanNode findTeachplanList(String courseId){
@@ -101,4 +114,29 @@ public class CourseService {
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
+    public QueryResponseResult findCourseList(int page,int size,String id ){
+        if(id == null && "".equals(id)){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        PageHelper.startPage(page,size);
+        Page<CourseInfo> coursepage= courseMapper.findCourseListPage(id);
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(coursepage.getResult());
+        queryResult.setTotal(coursepage.getTotal());
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
+    public CategoryNode findList(){
+        return null;
+    }
+
+    public CourseMarket getCourseMarketById(String courseId) {
+        CourseMarket courseMarket= courseMarketwMapper.getCourseMarketById(courseId);
+        return courseMarket;
+    }
+
+    public ResponseResult updateCourseMarket(String id, CourseMarket courseMarket) {
+        courseMarketwMapper.updateCourseMarket(id,courseMarket);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
 }
