@@ -8,7 +8,7 @@
             <id property="id" column="two_id"/>
             <result property="name" column="two_name"/>
             <collection property="children" ofType="com.ningmeng.framework.domain.course.ext.CategoryNode">
-                <id property="id" column="three_id"/>
+                <id property="id" column="three_id" />
                 <result property="name" column="three_name"/>
             </collection>
         </collection>
@@ -17,5 +17,9 @@
         select a.id one_id,a.name one_name,b.id two_id,b.name two_name,c.id three_id,c.name three_name from category a
         LEFT JOIN category b ON a.id=b.parentid
         LEFT JOIN category c ON b.id=c.parentid
+        <if test="parentId!=null and parentId!=''">
+            and b.id = #{parentId}
+        </if>
+        order by a.orderby,b.orderby,c.orderby
     </select>-->
 </mapper>
