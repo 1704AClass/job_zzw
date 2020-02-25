@@ -1,8 +1,6 @@
 package com.ningmeng.api.courseapi;
 
-import com.ningmeng.framework.domain.course.CourseMarket;
-import com.ningmeng.framework.domain.course.Teachplan;
-import com.ningmeng.framework.domain.course.TeachplanNode;
+import com.ningmeng.framework.domain.course.*;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
@@ -31,4 +29,11 @@ public interface CourseControllerApi {
 
     @ApiOperation("更新课程营销信息")
     public ResponseResult updateCourseMarket(String id,CourseMarket courseMarket);
+
+    @ApiOperation("课程视图查询")
+    public CourseView courseView(String id);
+
+    @ApiOperation("预览课程")
+    public CoursePublishResult preview(String id);
+
 }

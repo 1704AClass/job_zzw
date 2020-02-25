@@ -1,9 +1,7 @@
 package com.ningmeng.manage_course.controller;
 
 import com.ningmeng.api.courseapi.CourseControllerApi;
-import com.ningmeng.framework.domain.course.CourseMarket;
-import com.ningmeng.framework.domain.course.Teachplan;
-import com.ningmeng.framework.domain.course.TeachplanNode;
+import com.ningmeng.framework.domain.course.*;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
@@ -52,6 +50,18 @@ public class CourseController implements CourseControllerApi {
     @Override
     public ResponseResult updateCourseMarket(String id, CourseMarket courseMarket) {
         return courseService.updateCourseMarket(id,courseMarket);
+    }
+
+    @Override
+    @GetMapping("/courseview/{id}")
+    public CourseView courseView(String id) {
+        return courseService.getCoruseView(id);
+    }
+
+    @Override
+    @PostMapping("/preview/{id}")
+    public CoursePublishResult preview(String id) {
+        return courseService.preview(id);
     }
 
 }

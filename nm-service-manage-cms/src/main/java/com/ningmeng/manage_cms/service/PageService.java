@@ -33,6 +33,18 @@ public class PageService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    //添加页面，如果已经存在更新页面
+    public CmsPageResult save(CmsPage cmsPage){
+        //检验页面是否存在，根据页面名称，站点Id，页面webpath查询
+        CmsPage cmsPage1=cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if(cmsPage1!=null){
+            //更新
+            return this.update(cmsPage1.getPageId(),cmsPage);
+        }else{
+            return this.add(cmsPage);
+        }
+    }
+
     //发布页面方法
     public ResponseResult postPage(String pageId){
         boolean flag = creatHtml();
