@@ -4,6 +4,7 @@ import com.ningmeng.api.cmsaip.CmsPageControllerApi;
 import com.ningmeng.framework.domain.cms.CmsPage;
 import com.ningmeng.framework.domain.cms.request.QueryPageRequest;
 import com.ningmeng.framework.domain.cms.response.CmsPageResult;
+import com.ningmeng.framework.model.response.CmsPostPageResult;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
 import com.ningmeng.manage_cms.service.PageService;
@@ -62,5 +63,11 @@ public class CmsPageController implements CmsPageControllerApi {
     @PostMapping("/sava")
     public CmsPageResult save(CmsPage cmsPage) {
         return pageService.save(cmsPage);
+    }
+
+    @Override
+    @PostMapping("/postPageQuick")
+    public CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage) {
+        return pageService.postPageQuick(cmsPage);
     }
 }

@@ -9,10 +9,7 @@ import com.ningmeng.framework.domain.course.ext.CourseInfo;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.domain.course.response.CourseCode;
 import com.ningmeng.framework.exception.ExceptionCast;
-import com.ningmeng.framework.model.response.CommonCode;
-import com.ningmeng.framework.model.response.QueryResponseResult;
-import com.ningmeng.framework.model.response.QueryResult;
-import com.ningmeng.framework.model.response.ResponseResult;
+import com.ningmeng.framework.model.response.*;
 import com.ningmeng.manage_course.client.CmsPageClient;
 import com.ningmeng.manage_course.dao.*;
 import org.apache.commons.lang3.StringUtils;
@@ -66,6 +63,59 @@ public class CourseService {
     @Value("${course‐publish.previewUrl}")
     private String previewUrl;
 
+    //课程发布
+    @Transactional
+    public CoursePublishResult publish(String courseId){
+        //课程信息
+        CourseBase one = this.findCourseBaseById(courseId);
+        //发布课程详情页面
+        CmsPostPageResult cmsPostPageResult = publish_page(courseId);
+        if(!cmsPostPageResult.isSuccess()){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+         //更新课程状态
+         CourseBase courseBase = saveCoursePubState(courseId);
+        //课程索引...
+        //课程缓存...
+        //页面url
+        String pageUrl = cmsPostPageResult.getPageUrl();
+        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
+     }
+
+    //更新课程发布状态
+    private CourseBase saveCoursePubState(String courseId){
+        CourseBase courseBase=this.findCourseBaseById(courseId);
+        //更新发布状态
+        courseBase.setStatus("20000");
+        CourseBase save = courseBaseRepository.save(courseBase);
+        return save;
+    }
+
+    //发布课程正式页面
+    public CmsPostPageResult publish_page(String courseId){
+        CourseBase one = this.findCourseBaseById(courseId);
+        //发布课程预览页面
+        CmsPage cmsPage = new CmsPage();
+        //站点
+        cmsPage.setSiteId(publish_siteId);
+        //课程预览站点
+        //模板
+        cmsPage.setTemplateId(publish_templateId);
+        //页面名称
+        cmsPage.setPageName(courseId+".html");
+        //页面别名
+        cmsPage.setPageAliase(one.getName());
+        //页面访问路径
+        cmsPage.setPageWebPath(publish_page_webpath);
+        //页面存储路径
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);
+        //数据url
+        cmsPage.setDataUrl(publish_dataUrlPre+courseId);
+        //发布页面
+        CmsPostPageResult cmsPostPageResult = cmsPageClient.postPageQuick(cmsPage);
+        return cmsPostPageResult;
+    }
+
     //根据id查询课程基本信息
     public CourseBase findCourseBaseById(String courseId){
         Optional<CourseBase> baseOptional=courseBaseRepository.findById(courseId);
@@ -107,7 +157,7 @@ public class CourseService {
         return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
     }
 
-    //课程视图查询     
+    //课程视图查询
     public CourseView getCoruseView(String id){
         CourseView courseView= new CourseView();
         //查询课程基本信息

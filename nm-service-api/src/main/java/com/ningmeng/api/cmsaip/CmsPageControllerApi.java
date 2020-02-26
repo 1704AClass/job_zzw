@@ -3,6 +3,7 @@ package com.ningmeng.api.cmsaip;
 import com.ningmeng.framework.domain.cms.CmsPage;
 import com.ningmeng.framework.domain.cms.request.QueryPageRequest;
 import com.ningmeng.framework.domain.cms.response.CmsPageResult;
+import com.ningmeng.framework.model.response.CmsPostPageResult;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
@@ -38,4 +39,7 @@ public interface CmsPageControllerApi {
 
     @ApiOperation("保存页面")
     public CmsPageResult save(CmsPage cmsPage);
+
+    @ApiOperation("一键发布接口")
+    public CmsPostPageResult postPageQuick(CmsPage cmsPage);
 }
