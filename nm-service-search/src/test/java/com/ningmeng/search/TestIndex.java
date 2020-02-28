@@ -1,4 +1,4 @@
-package com.ningmeng;
+package com.ningmeng.search;
 
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
