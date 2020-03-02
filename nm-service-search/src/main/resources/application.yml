@@ -6,3 +6,6 @@ spring:
 ningmeng:
   elasticsearch:
     hostlist: ${eshostlist:127.0.0.1:9200} #多个结点中间用逗号分隔
+    course:
+      index: nm_course
+      type: doc
