@@ -7,7 +7,7 @@ spring:
     mongodb:
       uri:  mongodb://localhost:27017/nm_media
 nm-service-manage-media:
-  upload-location: D:/teach/video/
+  upload-location: D:/teach/ffmpeg/video/
 eureka:
   client:
     registerWithEureka: true #服务注册开关
