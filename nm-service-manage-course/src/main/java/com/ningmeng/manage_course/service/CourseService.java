@@ -54,9 +54,46 @@ public class CourseService {
 
     @Autowired
     private CoursePubRepository coursePubRepository;
+
+    @Autowired
+    private TeachplanMediaRepository teachplanMediaRepository;
     /*@Autowired
     private CategoryMapper categoryMapper;*/
 
+    //保存媒资信息
+    public ResponseResult savemedia(TeachplanMedia teachplanMedia) {
+        if(teachplanMedia == null){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        //课程计划ID
+        String teachplanId=teachplanMedia.getTeachplanId();
+        //通过Id进行查询课程计划信息
+        Optional<Teachplan> optional=teachplanRepository.findById(teachplanId);
+        if(!optional.isPresent()){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        Teachplan teachplan = optional.get();
+        //只允许为叶子结点课程计划选择视频
+        String grade = teachplan.getGrade();
+        if(StringUtils.isEmpty(grade) || !grade.equals("3")){
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        TeachplanMedia one = null;
+        Optional<TeachplanMedia> teachplanMediaOptional = teachplanMediaRepository.findById(teachplanId);
+        if(!teachplanMediaOptional.isPresent()){
+            one = new TeachplanMedia();
+        }else{
+            one = teachplanMediaOptional.get();
+        }
+        //保存媒资信息与课程计划信息
+        one.setTeachplanId(teachplanId);
+        one.setCourseId(teachplanMedia.getCourseId());
+        one.setMediaFileOriginalName(teachplanMedia.getMediaFileOriginalName());
+        one.setMediaId(teachplanMedia.getMediaId());
+        one.setMediaUrl(teachplanMedia.getMediaUrl());
+        teachplanMediaRepository.save(one);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
 
     //保存CoursePub
      public CoursePub saveCoursePub(String id, CoursePub coursePub){

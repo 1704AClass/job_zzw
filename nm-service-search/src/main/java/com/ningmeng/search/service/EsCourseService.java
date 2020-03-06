@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,50 @@ public class EsCourseService {
     private String source_field;
     @Autowired
     RestHighLevelClient restHighLevelClient;
+    //增加查询课程信息
+    public Map<String, CoursePub> getall(String id) {
+        //设置索引库
+        SearchRequest searchRequest = new SearchRequest(es_index);
+        //设置类型
+        searchRequest.types(es_type);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        //查询条件 根据Id进行查询
+        searchSourceBuilder.query(QueryBuilders.termsQuery("id",id));
+        //取消sourse原字段过滤，查询所有字段
+        searchSourceBuilder.fetchSource(new String[]{"name", "grade", "charge","pic"}, new String[]{});
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = null;
+        try {
+            //执行搜索
+            searchResponse = restHighLevelClient.search(searchRequest);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        //获取搜索结果
+        SearchHits hits = searchResponse.getHits();
+        SearchHit[] searchHits = hits.getHits();
+        Map<String,CoursePub> map = new HashMap<>();
+        for (SearchHit hit : searchHits) {
+            String courseId = hit.getId();
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String courseIds = (String) sourceAsMap.get("id");
+            String name = (String) sourceAsMap.get("name");
+            String grade = (String) sourceAsMap.get("grade");
+            String charge = (String) sourceAsMap.get("charge");
+            String pic = (String) sourceAsMap.get("pic");
+            String description = (String) sourceAsMap.get("description");
+            String teachplan = (String) sourceAsMap.get("teachplan");
+            CoursePub coursePub = new CoursePub();
+            coursePub.setId(courseIds);
+            coursePub.setName(name);
+            coursePub.setPic(pic);
+            coursePub.setGrade(grade);
+            coursePub.setTeachplan(teachplan);
+            coursePub.setDescription(description);
+            map.put(courseId,coursePub);
+        }
+        return map;
+    }
 
     public QueryResponseResult list(int page, int size, CourseSearchParam courseSearchParam){
         //设置索引

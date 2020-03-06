@@ -48,6 +48,7 @@
         <option value="$PROJECT_DIR$/nm-govern-center/pom.xml" />
         <option value="$PROJECT_DIR$/nm-service-search/pom.xml" />
         <option value="$PROJECT_DIR$/nm-service-manage-media/pom.xml" />
+        <option value="$PROJECT_DIR$/nm-service-manage-media-processor/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

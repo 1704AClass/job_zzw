@@ -6,8 +6,18 @@ spring:
   data:
     mongodb:
       uri:  mongodb://localhost:27017/nm_media
+#rabbitmq配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
 nm-service-manage-media:
-  upload-location: D:/teach/ffmpeg/video/
+  upload-location: E:/teach/video/
+  mq:
+    queue-media-video-processor: queue_media_video_processor #队列名称
+    routingkey-media-video: routingkey_media_video #routingKey的值
 eureka:
   client:
     registerWithEureka: true #服务注册开关
