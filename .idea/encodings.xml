@@ -14,6 +14,8 @@
     <file url="file://$PROJECT_DIR$/nm-service-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nm-service-base-filesystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nm-service-base-filesystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nm-service-learning/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nm-service-learning/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nm-service-manage-cms" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nm-service-manage-cms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nm-service-manage-course/src/main/java" charset="UTF-8" />

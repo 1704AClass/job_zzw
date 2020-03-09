@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/nm-govern-center/nm-govern-center.iml" filepath="$PROJECT_DIR$/nm-govern-center/nm-govern-center.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-api/nm-service-api.iml" filepath="$PROJECT_DIR$/nm-service-api/nm-service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-base-filesystem/nm-service-base-filesystem.iml" filepath="$PROJECT_DIR$/nm-service-base-filesystem/nm-service-base-filesystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nm-service-learning/nm-service-learning.iml" filepath="$PROJECT_DIR$/nm-service-learning/nm-service-learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-cms/nm-service-manage-cms.iml" filepath="$PROJECT_DIR$/nm-service-manage-cms/nm-service-manage-cms.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-course/nm-service-manage-course.iml" filepath="$PROJECT_DIR$/nm-service-manage-course/nm-service-manage-course.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" filepath="$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" />
