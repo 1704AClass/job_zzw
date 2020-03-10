@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" filepath="$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-media-processor/nm-service-manage-media-processor.iml" filepath="$PROJECT_DIR$/nm-service-manage-media-processor/nm-service-manage-media-processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-search/nm-service-search.iml" filepath="$PROJECT_DIR$/nm-service-search/nm-service-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nm-service-ucenter-auth/nm-service-ucenter-auth.iml" filepath="$PROJECT_DIR$/nm-service-ucenter-auth/nm-service-ucenter-auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm‐service‐manage‐cms‐client/nm‐service‐manage‐cms‐client.iml" filepath="$PROJECT_DIR$/nm‐service‐manage‐cms‐client/nm‐service‐manage‐cms‐client.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-rabbitmq-producer/test-rabbitmq-producer.iml" filepath="$PROJECT_DIR$/test-rabbitmq-producer/test-rabbitmq-producer.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-rebbitmq-consumer/test-rebbitmq-consumer.iml" filepath="$PROJECT_DIR$/test-rebbitmq-consumer/test-rebbitmq-consumer.iml" />

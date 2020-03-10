@@ -17,6 +17,7 @@
         <module>../nm-service-search</module>
         <module>../nm-service-manage-media</module>
         <module>../nm-service-learning</module>
+        <module>../nm-service-ucenter-auth</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
