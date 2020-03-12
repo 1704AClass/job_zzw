@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.ningmeng.framework.client.NmServiceList;
 import com.ningmeng.framework.domain.ucenter.ext.AuthToken;
 import com.ningmeng.framework.domain.ucenter.response.AuthCode;
-import com.ningmeng.framework.exception.CustomExceptionCast;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.ningmeng.framework.exception.ExceptionCast;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,6 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -45,17 +43,41 @@ public class AuthService {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
+    //从redis中删除令牌
+    public  boolean  delToken(String  access_token){
+        String  name  =  "user_token:"  +  access_token;
+        stringRedisTemplate.delete(name);
+        return  true;
+    }
+    
+    //从Redis中查询令牌
+    public AuthToken getUserToken(String token){
+        String userToken = "user_token:"+token;
+        String userTokenString = stringRedisTemplate.opsForValue().get(userToken);
+        if(userToken!=null){
+            AuthToken authToken = null;
+            try {
+                authToken = JSON.parseObject(userTokenString, AuthToken.class);
+            } catch (Exception e) {
+                LOGGER.error("getUserToken from redis and execute JSON.parseObject error {}",e.getMessage());
+                e.printStackTrace();
+            }
+            return authToken;
+        }
+        return null;
+    }
+
     public AuthToken login(String username,String password,String clientId,String clientSecret){
         //1、申请令牌
         AuthToken authToken = applyToken(username,password,clientId, clientSecret);
         if(authToken==null){
-            CustomExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
+            ExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
         }
         //2.将令牌保存到redis中
         String content = JSON.toJSONString(authToken);
         boolean flag = this.saveToken(authToken.getAccess_token(),content,tokenValiditySeconds);
         if(!flag){
-            CustomExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
+            ExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
         }
         return authToken;
     }
@@ -75,7 +97,7 @@ public class AuthService {
         ServiceInstance serviceInstance = loadBalancerClient.choose(NmServiceList.NM_SERVICE_UCENTER_AUTH);
         if(serviceInstance == null){
             LOGGER.error("choose an auth instance fail");
-            CustomExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
+            ExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
         }
         //获取令牌的url
         String authUrl = serviceInstance.getUri().toString()+"/auth/oauth/token";
@@ -116,12 +138,12 @@ public class AuthService {
 
             if(StringUtils.isNotEmpty(error_description)){
                 if("坏的凭证".equals(error_description)){
-                    CustomExceptionCast.cast(AuthCode.AUTH_CREDENTIAL_ERROR);
+                    ExceptionCast.cast(AuthCode.AUTH_CREDENTIAL_ERROR);
                 }else if(error_description.indexOf("UserDetailsService returned null")>=0){
-                    CustomExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
+                    ExceptionCast.cast(AuthCode.AUTH_ACCOUNT_NOTEXISTS);
                 }
             }
-            CustomExceptionCast.cast(AuthCode.AUTH_LOGIN_APPLYTOKEN_FAIL);
+            ExceptionCast.cast(AuthCode.AUTH_LOGIN_ERROR);
         }
 
         AuthToken authToken = new AuthToken();

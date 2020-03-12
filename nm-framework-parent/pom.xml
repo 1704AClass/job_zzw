@@ -18,6 +18,8 @@
         <module>../nm-service-manage-media</module>
         <module>../nm-service-learning</module>
         <module>../nm-service-ucenter-auth</module>
+        <module>../nm-service-ucenter</module>
+        <module>../nm-govern-gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

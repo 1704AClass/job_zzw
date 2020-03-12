@@ -1,6 +1,7 @@
 package com.ningmeng.api.auth;
 
 import com.ningmeng.framework.domain.ucenter.request.LoginRequest;
+import com.ningmeng.framework.domain.ucenter.response.JwtResult;
 import com.ningmeng.framework.domain.ucenter.response.LoginResult;
 import com.ningmeng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
@@ -14,4 +15,7 @@ public interface AuthControllerApi {
 
     @ApiOperation("退出")
     public ResponseResult logout();
+
+    @ApiOperation("查询userjwt令牌")
+    public JwtResult userjwt();
 }

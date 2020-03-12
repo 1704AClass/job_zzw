@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/nm-framework-parent/nm-framework-parent.iml" filepath="$PROJECT_DIR$/nm-framework-parent/nm-framework-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-framework-utils/nm-framework-utils.iml" filepath="$PROJECT_DIR$/nm-framework-utils/nm-framework-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-govern-center/nm-govern-center.iml" filepath="$PROJECT_DIR$/nm-govern-center/nm-govern-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nm-govern-gateway/nm-govern-gateway.iml" filepath="$PROJECT_DIR$/nm-govern-gateway/nm-govern-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-api/nm-service-api.iml" filepath="$PROJECT_DIR$/nm-service-api/nm-service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-base-filesystem/nm-service-base-filesystem.iml" filepath="$PROJECT_DIR$/nm-service-base-filesystem/nm-service-base-filesystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-learning/nm-service-learning.iml" filepath="$PROJECT_DIR$/nm-service-learning/nm-service-learning.iml" />
@@ -16,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" filepath="$PROJECT_DIR$/nm-service-manage-media/nm-service-manage-media.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-manage-media-processor/nm-service-manage-media-processor.iml" filepath="$PROJECT_DIR$/nm-service-manage-media-processor/nm-service-manage-media-processor.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-search/nm-service-search.iml" filepath="$PROJECT_DIR$/nm-service-search/nm-service-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nm-service-ucenter/nm-service-ucenter.iml" filepath="$PROJECT_DIR$/nm-service-ucenter/nm-service-ucenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm-service-ucenter-auth/nm-service-ucenter-auth.iml" filepath="$PROJECT_DIR$/nm-service-ucenter-auth/nm-service-ucenter-auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/nm‐service‐manage‐cms‐client/nm‐service‐manage‐cms‐client.iml" filepath="$PROJECT_DIR$/nm‐service‐manage‐cms‐client/nm‐service‐manage‐cms‐client.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-rabbitmq-producer/test-rabbitmq-producer.iml" filepath="$PROJECT_DIR$/test-rabbitmq-producer/test-rabbitmq-producer.iml" />
