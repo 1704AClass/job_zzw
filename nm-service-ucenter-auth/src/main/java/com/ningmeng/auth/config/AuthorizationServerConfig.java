@@ -52,11 +52,6 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Resource(name = "keyProp")
     private KeyProperties keyProperties;
 
-    //采用bcrypt对密码进行Hash
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     //客户端配置
     @Bean
@@ -139,6 +134,12 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
+    }
+
+    //采用bcrypt对密码进行Hash
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 

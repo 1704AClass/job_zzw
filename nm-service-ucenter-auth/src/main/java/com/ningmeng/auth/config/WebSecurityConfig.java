@@ -16,10 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Order(-1)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/userlogin","/userlogout");
-    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/userlogin","/userlogout","/userjwt");
 
+    }
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

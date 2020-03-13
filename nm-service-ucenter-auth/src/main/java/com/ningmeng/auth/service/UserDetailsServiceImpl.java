@@ -1,6 +1,7 @@
 package com.ningmeng.auth.service;
 
 import com.ningmeng.auth.client.UserClient;
+import com.ningmeng.framework.domain.ucenter.NmMenu;
 import com.ningmeng.framework.domain.ucenter.ext.NmUserExt;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     ClientDetailsService clientDetailsService;
-
     @Autowired
-    private UserClient userClient;
+    UserClient userclient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,46 +43,30 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        /*//从数据库查询用户正确的密码，Spring Security会去比对输入密码的正确性
-        userext.setUsername("ningmeng");
-        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
-        userext.setPermissions(new ArrayList<NmMenu>());
+        //请求ucenter查询用户
+        NmUserExt userext = userclient.getUserext(username);
         if(userext == null){
             return null;
         }
-        //取出正确密码（hash值）
+        //从数据库查询用户正确的密码，Spring Security会去比对输入密码的正确性
         String password = userext.getPassword();
-        //这里暂时使用静态密码
-        //String password ="123";
-        //用户权限，这里暂时使用静态数据，最终会从数据库读取
-        //从数据库获取权限
+
+        //指定用户的权限，这里暂时硬编码
+        List<String> permissionList = new ArrayList<>();
+        //取出用户权限
         List<NmMenu> permissions = userext.getPermissions();
-        List<String> user_permission = new ArrayList<>();
-        permissions.forEach(item-> user_permission.add(item.getCode()));
-        //user_permission.add("course_get_baseinfo");
-        //user_permission.add("course_find_pic");
-        String user_permission_string  = StringUtils.join(user_permission.toArray(), ",");
+        for(NmMenu nmMenu:permissions){
+            permissionList.add(nmMenu.getCode());
+        }
+        /*permissionList.add("course_get_baseinfo");
+        permissionList.add("course_find_pic");*/
+        //将权限串中间以逗号分隔(用户权限的字符串)
+        String permissionString = StringUtils.join(permissionList.toArray(), ",");
+
+        String user_permission_string = "";
         UserJwt userDetails = new UserJwt(username,
                 password,
                 AuthorityUtils.commaSeparatedStringToAuthorityList(user_permission_string));
-        userDetails.setId(userext.getId());
-        userDetails.setUtype(userext.getUtype());//用户类型
-        userDetails.setCompanyId(userext.getCompanyId());//所属企业
-        userDetails.setName(userext.getName());//用户名称
-        userDetails.setUserpic(userext.getUserpic());//用户头像
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(username,
-                password,
-                AuthorityUtils.commaSeparatedStringToAuthorityList(""));
-                AuthorityUtils.createAuthorityList("course_get_baseinfo","course_get_list"));
-        return userDetails;*/
-        NmUserExt userext = userClient.getUserExt(username);
-        if(userext == null){
-            //返回NULL表示用户不存在，Spring Security会抛出异常
-            return null;
-        }
-        String password = userext.getPassword();
-        String user_permission_string = "";
-        UserJwt userDetails=new UserJwt(username,password,AuthorityUtils.commaSeparatedStringToAuthorityList(user_permission_string));
         //用户id
         userDetails.setId(userext.getId());
         //用户名称

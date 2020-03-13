@@ -15,6 +15,15 @@ spring:
         maxIdle: 3
         minIdle: 1
         maxWait: -1 #连接池最大等行时间 -1没有限制
+zuul:
+  routes:
+    manage‐course: #路由名称，名称任意，保持所有路由名称唯一
+      path: /course/**
+      serviceId: nm‐service‐manage‐course #指定服务id，从Eureka中找到服务的ip和端口
+      #url: http://localhost:31200 #也可指定url
+      strip‐prefix: false #true：代理转发时去掉前缀，false:代理转发时不去掉前缀
+      sensitiveHeaders: #默认zuul会屏蔽cookie，cookie不会传到下游服务，这里设置为空则取消默认的黑名单，如果设置了具体的头信息则不会传到下游服务
+      # ignoredHeaders: Authorization
 eureka:
   client:
     registerWithEureka: true #服务注册开关
@@ -31,41 +40,3 @@ ribbon:
   OkToRetryOnAllOperations: false  #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false
   ConnectTimeout: 5000  #请求连接的超时时间
   ReadTimeout: 6000 #请求处理的超时时间
-zuul:
-  routes:
-    #manage-course : #路由名称，名称随意，保持所有路由的名称都唯一
-      #path: /course/**
-      #serviceId: nm-service-manage-course #指定服务id，从Eureka中找对对应的ip和端口
-      #url: http://localhost:31200 #也可指定url
-      #strip‐prefix: false #true：代理转发时去掉前缀，false:代理转发时不去掉前缀单，如果设置了具体的头信息则不会传到下游服务
-      # ignoredHeaders: Authorization
-    nm‐service‐learning: #路由名称，名称任意，保持所有路由名称唯一
-      path: /learning/**
-      serviceId: nm‐service‐learning #指定服务id，从Eureka中找到服务的ip和端口
-      strip‐prefix: false
-      sensitiveHeaders:
-    manage‐course:
-      path: /course/**
-      serviceId: nm‐service‐manage‐course
-      strip‐prefix: false
-      sensitiveHeaders:
-    manage‐cms:
-      path: /cms/**
-      serviceId: nm‐service‐manage‐cms
-      strip‐prefix: false
-      sensitiveHeaders:
-    manage‐sys:
-      path: /sys/**
-      serviceId: nm‐service‐manage‐cms
-      strip‐prefix: false
-      sensitiveHeaders:
-    service‐ucenter:
-      path: /ucenter/**
-      serviceId: nm‐service‐ucenter
-      strip‐prefix: false
-      sensitiveHeaders:
-    nm‐service‐manage‐order:
-      path: /order/**
-      serviceId: nm‐service‐manage‐order
-      strip‐prefix: false
-      sensitiveHeaders:

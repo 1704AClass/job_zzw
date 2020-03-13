@@ -6,10 +6,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value=NmServiceList.NM_SERVICE_UCENTER)
+@FeignClient(value = NmServiceList.NM_SERVICE_UCENTER)
 public interface UserClient {
-
-    @GetMapping("/ucenter/getUserExt")
-    public NmUserExt getUserExt(@RequestParam("username") String username);
-
+    @GetMapping("/ucenter/getuserext")
+    public NmUserExt getUserext(@RequestParam("username") String username);
 }
