@@ -2,6 +2,7 @@ package com.ningmeng.manage_course.controller;
 
 import com.ningmeng.api.courseapi.CourseControllerApi;
 import com.ningmeng.framework.domain.course.*;
+import com.ningmeng.framework.domain.course.request.CourseListRequest;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
@@ -15,6 +16,16 @@ public class CourseController implements CourseControllerApi {
 
     @Autowired
     CourseService courseService;
+
+    @Override
+    @GetMapping("/coursebase/list/{page}/{size}")
+    public QueryResponseResult findCourseList(@PathVariable("page") int page,
+                                              @PathVariable("size") int size,
+                                              CourseListRequest courseListRequest) {
+        //先使用静态数据测试
+        String companyId = "1";
+        return courseService.findCourseList(companyId,page,size,courseListRequest);
+    }
 
     //查询课程计划
     @Override
@@ -33,7 +44,8 @@ public class CourseController implements CourseControllerApi {
     @Override
     @GetMapping("/course/findCourseList/{page}/{size}")
     public QueryResponseResult findCourseList(int page, int size, String id) {
-        return courseService.findCourseList(page,size,id);
+        /*return courseService.findCourseList(page,size,id);*/
+        return null;
     }
 
     @Override

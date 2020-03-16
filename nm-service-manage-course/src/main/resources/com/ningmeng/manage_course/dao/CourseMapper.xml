@@ -5,8 +5,21 @@
             resultType="com.ningmeng.framework.domain.course.CourseBase">
         select * from course_base where id = #{id}
     </select>
-    <select id="findCourseListPage" parameterType="java.lang.String"
+   <!-- <select id="findCourseListPage" parameterType="java.lang.String"
             resultType="com.ningmeng.framework.domain.course.request.CourseListRequest">
             select * from course_base a LEFT JOIN course_pic b ON a.id=b.courseid where company_id=#{companyId}
+    </select>-->
+
+    <select id="findCourseListPage" resultType="com.ningmeng.framework.domain.course.ext.CourseInfo"
+            parameterType="com.ningmeng.framework.domain.course.request.CourseListRequest">
+        SELECT
+        course_base.*,
+        (SELECT pic FROM course_pic WHERE courseid = course_base.id) pic
+        FROM
+        course_base
+        where 1=1
+        <if test="companyId!=null and companyId!=''">
+            and course_base.company_id = #{companyId}
+        </if>
     </select>
 </mapper> 

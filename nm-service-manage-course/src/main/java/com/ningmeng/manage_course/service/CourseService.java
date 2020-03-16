@@ -7,6 +7,7 @@ import com.ningmeng.framework.domain.cms.CmsPage;
 import com.ningmeng.framework.domain.cms.response.CmsPageResult;
 import com.ningmeng.framework.domain.course.*;
 import com.ningmeng.framework.domain.course.ext.CourseInfo;
+import com.ningmeng.framework.domain.course.request.CourseListRequest;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.domain.course.response.CourseCode;
 import com.ningmeng.framework.exception.ExceptionCast;
@@ -370,7 +371,31 @@ public class CourseService {
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
-    public QueryResponseResult findCourseList(int page,int size,String id ){
+    public QueryResponseResult findCourseList(String companyId, int page, int size, CourseListRequest courseListRequest){
+        if(courseListRequest == null){
+            courseListRequest = new CourseListRequest();
+        }
+        //企业id
+        courseListRequest.setCompanyId(companyId);
+        //将companyId传给dao
+        courseListRequest.setCompanyId(companyId);
+        if(page<=0){
+            page = 0;
+        }
+        if(size<=0){
+            size = 20;
+        }
+        PageHelper.startPage(page, size);
+        Page<CourseInfo> courseListPage = courseMapper.findCourseListPage(courseListRequest);
+        List<CourseInfo> list = courseListPage.getResult();
+        long total = courseListPage.getTotal();
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(courseListPage.getResult());
+        queryResult.setTotal(courseListPage.getTotal());
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
+   /* public QueryResponseResult findCourseList(String companyId,int page,int size,String id ){
         if(id == null && "".equals(id)){
             ExceptionCast.cast(CommonCode.FAIL);
         }
@@ -380,7 +405,7 @@ public class CourseService {
         queryResult.setList(coursepage.getResult());
         queryResult.setTotal(coursepage.getTotal());
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
-    }
+    }*/
 
     public CategoryNode findList(){
         return null;

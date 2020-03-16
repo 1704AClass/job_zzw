@@ -20,6 +20,7 @@
         <module>../nm-service-ucenter-auth</module>
         <module>../nm-service-ucenter</module>
         <module>../nm-govern-gateway</module>
+        <module>../nm-service-manage-order</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

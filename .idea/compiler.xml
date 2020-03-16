@@ -10,7 +10,7 @@
         <module name="nm-govern-center" />
         <module name="nm-service-learning" />
         <module name="nm-service-search" />
-        <module name="nm-framework-utils" />
+        <module name="nm-service-ucenter" />
         <module name="nm-govern-gateway" />
         <module name="nm-service-manage-cms" />
         <module name="nm‐service‐manage‐cms" />
@@ -23,7 +23,8 @@
         <module name="test-rebbitmq-consumer" />
         <module name="nm-framework-model" />
         <module name="nm-service-manage-course" />
-        <module name="nm-service-ucenter" />
+        <module name="nm-framework-utils" />
+        <module name="nm-service-manage-order" />
         <module name="nm-service-manage-media" />
         <module name="nm-service-ucenter-auth" />
       </profile>
@@ -42,6 +43,7 @@
       <module name="nm-service-manage-course" target="1.8" />
       <module name="nm-service-manage-media" target="1.8" />
       <module name="nm-service-manage-media-processor" target="1.8" />
+      <module name="nm-service-manage-order" target="1.8" />
       <module name="nm-service-search" target="1.8" />
       <module name="nm-service-ucenter" target="1.8" />
       <module name="nm-service-ucenter-auth" target="1.8" />
@@ -65,6 +67,7 @@
       <module name="nm-service-manage-course" options="-parameters" />
       <module name="nm-service-manage-media" options="-parameters" />
       <module name="nm-service-manage-media-processor" options="-parameters" />
+      <module name="nm-service-manage-order" options="-parameters" />
       <module name="nm-service-search" options="-parameters" />
       <module name="nm-service-ucenter" options="-parameters" />
       <module name="nm-service-ucenter-auth" options="-parameters" />

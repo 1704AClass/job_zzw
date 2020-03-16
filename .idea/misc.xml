@@ -53,6 +53,7 @@
         <option value="$PROJECT_DIR$/nm-service-ucenter-auth/pom.xml" />
         <option value="$PROJECT_DIR$/nm-service-ucenter/pom.xml" />
         <option value="$PROJECT_DIR$/nm-govern-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/nm-service-manage-order/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

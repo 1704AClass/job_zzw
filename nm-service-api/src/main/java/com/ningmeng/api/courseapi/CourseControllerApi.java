@@ -1,6 +1,7 @@
 package com.ningmeng.api.courseapi;
 
 import com.ningmeng.framework.domain.course.*;
+import com.ningmeng.framework.domain.course.request.CourseListRequest;
 import com.ningmeng.framework.domain.course.response.CategoryNode;
 import com.ningmeng.framework.model.response.QueryResponseResult;
 import com.ningmeng.framework.model.response.ResponseResult;
@@ -13,6 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Api(value="课程管理页面",description = "课程管理接口，提供课程管理的增、删、改、查")
 public interface CourseControllerApi {
+
+    @ApiOperation("课程查询")
+    public QueryResponseResult findCourseList(int page, int size, CourseListRequest courseListRequest);
+
     @ApiOperation("课程计划查询")
     public TeachplanNode findTeachplanList(String courseid);
 
