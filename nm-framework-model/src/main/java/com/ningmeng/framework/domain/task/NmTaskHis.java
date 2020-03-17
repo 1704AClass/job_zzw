@@ -12,9 +12,9 @@ import java.util.Date;
 @Data
 @ToString
 @Entity
-@Table(name = "xc_task_his")
+@Table(name = "nm_task_his")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")
-public class XcTaskHis implements Serializable {
+public class NmTaskHis implements Serializable {
 
     @Id
     @GeneratedValue(generator = "jpa-assigned")

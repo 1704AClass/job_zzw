@@ -12,9 +12,9 @@ import java.util.Date;
 @Data
 @ToString
 @Entity
-@Table(name="xc_orders_detail")
+@Table(name="nm_orders_detail")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class XcOrdersDetail implements Serializable {
+public class NmOrdersDetail implements Serializable {
     private static final long serialVersionUID = -916357210051689789L;
     @Id
     @GeneratedValue(generator = "jpa-uuid")

@@ -1,4 +1,4 @@
-package com.ningmeng.framework.domain.learning.response;
+package com.ningmeng.framework.domain.learning;
 
 import com.ningmeng.framework.model.response.ResponseResult;
 import com.ningmeng.framework.model.response.ResultCode;

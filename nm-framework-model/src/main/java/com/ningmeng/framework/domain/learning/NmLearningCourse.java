@@ -8,14 +8,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @Data
 @ToString
 @Entity
-@Table(name="xc_learning_list")
+@Table(name="nm_learning_course")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class XcLearningList implements Serializable {
-    private static final long serialVersionUID = -916357210051689799L;
+public class NmLearningCourse implements Serializable {
+    private static final long serialVersionUID = -916357210051789799L;
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     @Column(length = 32)
@@ -24,6 +23,7 @@ public class XcLearningList implements Serializable {
     private String courseId;
     @Column(name = "user_id")
     private String userId;
+    private String valid;
     @Column(name = "start_time")
     private Date startTime;
     @Column(name = "end_time")

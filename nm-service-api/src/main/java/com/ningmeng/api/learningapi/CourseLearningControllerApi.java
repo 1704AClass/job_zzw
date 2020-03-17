@@ -1,6 +1,6 @@
 package com.ningmeng.api.learningapi;
 
-import com.ningmeng.framework.domain.learning.response.GetMediaResult;
+import com.ningmeng.framework.domain.learning.GetMediaResult;
 import io.swagger.annotations.Api;
 
 /**
